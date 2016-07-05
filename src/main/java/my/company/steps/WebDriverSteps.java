@@ -35,19 +35,23 @@ public class WebDriverSteps {
     @Step
     public void search(String text) {
     	driver.findElement(By.id("header-search")).sendKeys(text);            	
-    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	WebDriverWait wait = new WebDriverWait(driver, 30);
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.className("button__text")));
         button.click();
     }
 
     @Step
     public void openPageLinkText(String text) {
-    	driver.findElement(By.linkText(text)).click();    	
+    	WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.linkText(text)));
+        element.click();
     }
     
     @Step
     public void openPagePartialLinkText(String text) {
-    	driver.findElement(By.partialLinkText(text)).click();    	
+    	WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.partialLinkText(text)));
+        element.click();
     }    
     
     @Step
@@ -57,14 +61,16 @@ public class WebDriverSteps {
     
     @Step
     public void setCheckboxText(String text) {        
-        driver.findElement(By.xpath("//*[@class='checkbox__label' and text()='" + text + "']")).click();        
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='checkbox__label' and text()='" + text + "']")));
+        element.click();
     }
     
     @Step
     public void clickButtonText(String text) {            	 	
-        // using javascript due to click() method somehow not working here
+        // using javascript due to click() method somehow not working with driver
         ////driver.findElement(By.xpath("//*[contains(text(), '" + text + "')]")).click();
-    	WebDriverWait wait = new WebDriverWait(driver, 10);
+    	WebDriverWait wait = new WebDriverWait(driver, 30);
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[contains(text(), '" + text + "')]")));
      	JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("arguments[0].click();", button);

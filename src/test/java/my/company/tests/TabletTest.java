@@ -9,7 +9,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import java.util.concurrent.TimeUnit;
 
 
-public class LaptopTest {
+public class TabletTest {
 
     private WebDriverSteps steps;
 
@@ -21,7 +21,7 @@ public class LaptopTest {
     }
 
     @Test
-    public void laptopTest() throws Exception {
+    public void tabletTest() throws Exception {
     	// setting implicit wait and opening main test page    	
     	steps.driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     	steps.openMainPage();
@@ -30,15 +30,16 @@ public class LaptopTest {
         // navigating through market sub-pages
         steps.openPageLinkText("Маркет");
         steps.openPageLinkText("Компьютеры");        
-        steps.openPageLinkText("Ноутбуки");
+        steps.openPageLinkText("Планшеты");
         steps.makeScreenshot();
         
         // go to extended search and fill the params
         steps.openPagePartialLinkText("Расширенный");
         steps.openPageLinkText("Ещё");
-        steps.sendValueById("gf-priceto-var", "30000");
-        steps.setCheckboxText("HP");
-        steps.setCheckboxText("Lenovo");
+        steps.sendValueById("gf-pricefrom-var", "20000");
+        steps.sendValueById("gf-priceto-var", "25000");
+        steps.setCheckboxText("Acer");
+        steps.setCheckboxText("DELL");
         steps.clickButtonText("Применить");        
         steps.makeScreenshot();
         
